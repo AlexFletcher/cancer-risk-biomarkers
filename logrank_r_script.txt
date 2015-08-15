@@ -1,0 +1,6 @@
+test <-read.table("KM_scraping_simpson.csv",sep=",",header=TRUE) # change the CSV filename here
+library(survival)
+s <- Surv(test$end_time)
+s_km <- survfit(s~test$quartile)
+#plot(s_km)
+survdiff(s~test$quartile)
