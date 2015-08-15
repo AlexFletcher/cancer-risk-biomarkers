@@ -1,7 +1,7 @@
 # cancer-risk-biomarkers
 Code associated with the manuscript "A computational modelling approach for deriving biomarkers to predict cancer risk in premalignant disease"
 
-The provided code is in a number of files, which should all be stored in the same directory.
+The provided code is in a number of MATLAB .m files, which should all be stored in the same directory.
 
 A description of the files is provided below:
 
@@ -50,3 +50,11 @@ To make the correlation coefficient vs number of biopsies plot, lines 527-583 sh
 makeKMgraph.m - a helper function for creating the Kaplan-Meier curves, as well as the input data for the R script performing the log rank test. Note that in order for R to use this csv, the file must be manually modified to have the header "end_time" for column 1 and "quartile" for column 2.
 
 logrank_r_script.txt - contains the script that can be used with R Commander, when set to the appropriate directory containing the CSV file, when referenced to the correct file. Note that the CSV must have the appropriate headers of “end_time” for column 1 and “quartile” for column 2, that must be manually added, for this script to work.
+
+ADDITIONAL FILES:
+
+new_model2d_birth_death.m - a file similar to new_model2d.m which contains the basis of the Gillespie algorithm for the equivalent model, but with a birth death process instead. This file is to be used with summary_stats_birth_death.m ONLY.
+
+new_model2d_non_overlapping_bx.m - a file similar to new_model2d.m, which contains the basis of the Gillespie algorithm for the equivalent model, but with biopsies at the same timepoint that are chosen specifically to not overlap. Note that it must be always possible to choose biopsies in this manner, else the code will be stuck in an infinite loop. This is to be used with summary_stats_non_overlapping.m ONLY. Note that the weight matrix may have to be modified to account for a new size of biopsy which is possible in a non-overlapping setting.
+
+new_model2d_vary_probs.m - a file similar to new_model2d.m which contains the basis of the Gillespie algorithm for the equivalent model, but with two additional parameters that specify the probability of a positive or neutral mutation in the birth process. These are the two last parameters input. This file is to be used with summary_stats_vary_probs.m ONLY.
